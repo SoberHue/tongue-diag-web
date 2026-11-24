@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>图解舌诊</title>
+<meta name="description" content="罗大伦《图解舌诊：伸伸舌头百病消》：舌面脏腑分区、照镜分路自查、原书图鉴与易混对比、调理方法与红线、病因传导与闯关自测。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23B5392B'/%3E%3Ctext x='16' y='22.5' text-anchor='middle' font-size='18' font-weight='700' fill='%23FFF9F2'%3E%E8%88%8C%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<nav class="app-nav" id="app-nav" role="tablist" aria-label="六大交互视图">
+  <a class="rail-brand" href="#main" aria-label="图解舌诊">舌</a>
+  <button type="button" class="nav-tab" role="tab" id="tab-overview" data-tab="overview" data-tip="书 · 全书骨架" aria-controls="panel-overview" aria-selected="true" aria-current="page" aria-label="书：十章骨架与七大体质">
+    <span class="nav-pill">书</span>
+  </button>
+  <button type="button" class="nav-tab" role="tab" id="tab-zones" data-tab="zones" data-tip="诊 · 舌面分区" aria-controls="panel-zones" aria-selected="false" aria-label="诊：舌面脏腑分区">
+    <span class="nav-pill">诊</span>
+  </button>
+  <button type="button" class="nav-tab" role="tab" id="tab-wizard" data-tab="wizard" data-tip="镜 · 照镜自查" aria-controls="panel-wizard" aria-selected="false" aria-label="镜：照镜分路自查">
+    <span class="nav-pill">镜</span>
+  </button>
+  <button type="button" class="nav-tab" role="tab" id="tab-atlas" data-tab="atlas" data-tip="鉴 · 图鉴对比" aria-controls="panel-atlas" aria-selected="false" aria-label="鉴：原书图鉴与易混对比">
+    <span class="nav-pill">鉴</span>
+  </button>
+  <button type="button" class="nav-tab" role="tab" id="tab-remedies" data-tab="remedies" data-tip="方 · 调理与红线" aria-controls="panel-remedies" aria-selected="false" aria-label="方：调理方法与红线">
+    <span class="nav-pill">方</span>
+  </button>
+  <button type="button" class="nav-tab" role="tab" id="tab-mastery" data-tab="mastery" data-tip="测 · 传导与自测" aria-controls="panel-mastery" aria-selected="false" aria-label="测：病因传导与自测">
+    <span class="nav-pill">测</span>
+  </button>
+</nav>
+
+<header class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#main">
+      <span class="brand-seal" aria-hidden="true">舌</span>
+      <span class="brand-text">
+        <strong class="brand-title">图解舌诊</strong>
+        <span class="brand-sub" id="brand-sub">罗大伦《图解舌诊：伸伸舌头百病消》</span>
+      </span>
+    </a>
+    <button type="button" class="search-trigger" id="search-open" aria-haspopup="dialog" aria-label="搜索章节、体质、舌象、方法、药材">
+      <svg class="icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="5.5"></circle><path d="M13.2 13.2L17 17"></path></svg>
+      <span class="search-trigger-text">搜索章节、体质、舌象、方法、药材</span>
+      <kbd class="kbd" id="search-kbd">Ctrl K</kbd>
+    </button>
+  </div>
+</header>
+
+<main id="main" class="app-main">
+  <!-- Tab 1: 书 · 全书骨架 -->
+  <section id="panel-overview" class="panel panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+    <div class="split-shell split-overview">
+      <div class="master-col overview-master" id="overview-master">
+        <header class="page-head">
+          <h1 class="page-title">全书骨架</h1>
+          <p class="page-meta"><span class="only-compact">罗大伦 著 · </span>十章 · 七体质 · 205 页</p>
+        </header>
+        <div class="seg-bar overview-seg-wrap">
+          <div class="seg-track" id="overview-seg" role="tablist" aria-label="全书骨架切换">
+            <button type="button" class="seg-btn" role="tab" data-ov-seg="chapters" aria-selected="true">
+              <span>章节</span><span class="seg-count">10</span>
+            </button>
+            <button type="button" class="seg-btn" role="tab" data-ov-seg="constitutions" aria-selected="false">
+              <span>体质</span><span class="seg-count">7</span>
+            </button>
+          </div>
+        </div>
+        <div class="overview-sec" id="overview-chapters-sec">
+          <div class="chapter-tree" id="chapter-tree"></div>
+        </div>
+        <div class="overview-sec" id="overview-consts-sec" data-mobile-hidden="true">
+          <div class="const-strip-head">
+            <span class="group-label">七大体质</span>
+            <span class="caption-note">点击查看体质档案</span>
+          </div>
+          <div class="const-grid" id="const-grid"></div>
+        </div>
+      </div>
+      <aside class="detail-panel inspector" id="inspector" aria-label="章节与体质详情"></aside>
+    </div>
+  </section>
+
+  <!-- Tab 2: 诊 · 舌面分区 -->
+  <section id="panel-zones" class="panel panel-zones" role="tabpanel" aria-labelledby="tab-zones" hidden>
+    <div class="split-shell split-zones">
+      <div class="master-col zones-master">
+        <header class="page-head page-head-inline">
+          <h1 class="page-title">舌面分区</h1>
+          <div class="seg-track seg-compact" id="zone-mode" role="tablist" aria-label="分区图显示方式">
+            <button type="button" class="seg-btn" role="tab" data-mode="map" aria-selected="true" aria-pressed="true">交互分区图</button>
+            <button type="button" class="seg-btn" role="tab" data-mode="book" aria-selected="false" aria-pressed="false">原书图</button>
+          </div>
+        </header>
+        <div class="surface-card zone-stage" id="zone-stage">
+          <div class="zone-map" id="zone-map"></div>
+          <figure class="zone-book" id="zone-book" hidden></figure>
+        </div>
+        <div class="zone-bar-wrap" id="zone-bar-wrap">
+          <div class="zone-chips" id="zone-chips"></div>
+        </div>
+      </div>
+      <article class="detail-panel zone-detail-shell" aria-live="polite">
+        <div class="zone-detail-scroll" id="zone-detail"></div>
+        <div class="scroll-hint" id="zone-scroll-hint" aria-hidden="true" hidden></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Tab 3: 镜 · 照镜自查 -->
+  <section id="panel-wizard" class="panel panel-wizard" role="tabpanel" aria-labelledby="tab-wizard" hidden>
+    <div class="split-shell split-wizard">
+      <div class="wz-main">
+        <header class="page-head page-head-wizard">
+          <div class="wz-title-group">
+            <h1 class="page-title wz-page-title">照镜自查</h1>
+            <p class="page-meta wz-page-sub">舌色 → 舌苔 → 舌形血络 → 症状合参</p>
+          </div>
+        </header>
+        <button type="button" class="gate-strip" id="gate" data-gate-state="pending" aria-haspopup="dialog" aria-expanded="false">
+          <span class="gate-seal" id="gate-seal" aria-hidden="true">查</span>
+          <span class="gate-body-col">
+            <span class="gate-top-line">
+              <span class="gate-strip-label">观舌前 12 项假象排除</span>
+              <span class="gate-status" id="gate-status">待核对</span>
+              <span class="gate-preg-badge" id="gate-preg-badge" hidden></span>
+            </span>
+            <span class="gate-sub-line" id="gate-sub-line">晨起、饭后、染苔饮品、灯光偏差与孕期会影响判读，请先核对</span>
+          </span>
+          <span class="gate-cta" id="gate-cta">先核对 ›</span>
+        </button>
+        <div class="wz-stepper-wrap" id="wz-stepper-wrap">
+          <ol class="wizard-stepper" id="wizard-path" role="tablist" aria-label="自查四步导航"></ol>
+          <button type="button" class="btn-rail-open only-desktop" id="rail-open-desktop">
+            <svg class="icon icon-xs" viewBox="0 0 20 20" aria-hidden="true"><circle cx="4.5" cy="5.5" r="2"></circle><circle cx="15.5" cy="5.5" r="2"></circle><circle cx="10" cy="14.5" r="2"></circle><path d="M6.5 5.5h7M5.7 7.2l3.1 5.5M14.3 7.2l-3.1 5.5"></path></svg>
+            <span>轨迹全图</span>
+          </button>
+        </div>
+        <article class="surface-card step-panel" id="wizard-step"></article>
+      </div>
+      <aside class="detail-panel readout-rail" id="wizard-readout" aria-label="实时分路解读"></aside>
+    </div>
+    <div class="bottom-dock wizard-dock" id="wizard-dock"></div>
+  </section>
+
+  <!-- Tab 4: 鉴 · 图鉴对比 -->
+  <section id="panel-atlas" class="panel panel-atlas" role="tabpanel" aria-labelledby="tab-atlas" hidden>
+    <div class="split-shell split-atlas">
+      <div class="master-col atlas-master">
+        <header class="page-head">
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <span id="atlas-origin-slot" hidden></span>
+            <h1 class="page-title">图鉴对比</h1>
+          </div>
+          <p class="page-meta" id="atlas-meta"></p>
+        </header>
+        <div class="atlas-seg-wrap">
+          <div class="seg-track" id="atlas-seg" role="tablist" aria-label="图鉴与对比切换">
+            <button type="button" class="seg-btn" role="tab" data-atlas-seg="signs" aria-selected="true">
+              <span>舌象图鉴</span><span class="seg-count" id="atlas-seg-signs-count">39</span>
+            </button>
+            <button type="button" class="seg-btn" role="tab" data-atlas-seg="compare" aria-selected="false">
+              <span>易混对比</span><span class="seg-count" id="atlas-seg-cmp-count">8</span>
+            </button>
+          </div>
+        </div>
+        <div class="atlas-signs-sec" id="atlas-signs-sec">
+          <div class="atlas-filter-sticky" id="atlas-filter-sticky">
+            <div class="atlas-filters" id="atlas-filters"></div>
+            <div class="active-chips-row" id="atlas-active-chips" hidden></div>
+          </div>
+          <p class="result-line" id="atlas-count" aria-live="polite"></p>
+          <div class="atlas-grid-scroll" id="atlas-grid-scroll">
+            <div class="sign-grid" id="sign-grid" role="list"></div>
+          </div>
+        </div>
+      </div>
+      <section class="detail-panel compare-panel" id="compare-panel" aria-labelledby="compare-title" data-mobile-hidden="true">
+        <header class="cmp-panel-head">
+          <div class="cmp-panel-titles">
+            <h2 class="cmp-panel-title" id="compare-title">易混对比</h2>
+            <span class="caption-note" id="compare-total-note">8 组</span>
+          </div>
+          <div class="panel-nav-btns">
+            <button type="button" class="btn-ghost-sm" id="cmp-prev-btn">‹ 上一组</button>
+            <button type="button" class="btn-ghost-sm" id="cmp-next-btn">下一组 ›</button>
+          </div>
+        </header>
+        <div class="compare-picker" id="compare-picker" role="tablist" aria-label="选择易混对比组"></div>
+        <article class="compare-stage" id="compare-stage" role="tabpanel"></article>
+      </section>
+    </div>
+  </section>
+
+  <!-- Tab 5: 方 · 调理与红线 -->
+  <section id="panel-remedies" class="panel panel-remedies" role="tabpanel" aria-labelledby="tab-remedies" hidden>
+    <div class="split-shell split-remedies">
+      <div class="master-col remedies-master">
+        <header class="page-head">
+          <h1 class="page-title">调理与红线</h1>
+          <p class="page-meta">红色区块为禁忌与红线，务必先读</p>
+        </header>
+        <div class="remedy-filter-sticky" id="remedy-filters"></div>
+        <div class="result-line-wrap">
+          <p class="result-line" id="remedy-count" aria-live="polite"></p>
+          <button type="button" class="text-link-btn" id="remedy-reset-inline" hidden>重置筛选</button>
+        </div>
+        <div class="remedy-list-scroll" id="remedy-list-scroll">
+          <div class="remedy-grid" id="remedy-grid" role="listbox" aria-label="调理方法列表"></div>
+        </div>
+      </div>
+      <article class="detail-panel remedy-detail-panel" id="remedy-detail" aria-label="调理方法详情"></article>
+    </div>
+  </section>
+
+  <!-- Tab 6: 测 · 传导与自测 -->
+  <section id="panel-mastery" class="panel panel-mastery" role="tabpanel" aria-labelledby="tab-mastery" hidden>
+    <div class="mastery-shell">
+      <header class="page-head page-head-mastery">
+        <div class="mastery-title-group">
+          <h1 class="page-title">传导与自测</h1>
+          <p class="page-meta" id="mastery-meta">3 张传导图 · 16 道情景题</p>
+        </div>
+        <div class="mastery-switch-sticky" id="mastery-switch-sticky">
+          <div class="seg-track mastery-switch" id="mastery-view-switch" role="tablist" aria-label="传导与自测切换">
+            <button type="button" class="seg-btn" role="tab" data-mastery-view="causal" aria-selected="true">
+              <span>传导图</span><span class="seg-count" id="causal-total-count">3</span>
+            </button>
+            <button type="button" class="seg-btn" role="tab" data-mastery-view="quiz" aria-selected="false">
+              <span>自测</span><span class="seg-count" id="quiz-total-count">16</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="mastery-view mastery-causal" id="mastery-causal-view">
+        <div class="split-shell split-causal">
+          <article class="surface-card causal-master-card">
+            <div class="pill-rail causal-picker" id="causal-picker" role="tablist" aria-label="选择传导图"></div>
+            <div class="causal-subhead only-desktop">
+              <span class="group-label" id="causal-summary-text"></span>
+              <span class="causal-legend">
+                <span class="legend-item"><span class="legend-line-solid"></span>传变</span>
+                <span class="legend-item"><span class="legend-line-dashed"></span>可逆 / 复发</span>
+              </span>
+            </div>
+            <div class="causal-graph" id="causal-graph"></div>
+            <p class="causal-legend causal-legend-mobile only-compact">
+              <span class="legend-item"><span class="legend-line-solid"></span>传变</span>
+              <span class="legend-item"><span class="legend-line-dashed"></span>可逆 / 复发</span>
+            </p>
+          </article>
+          <article class="detail-panel causal-detail" id="causal-detail" aria-label="节点机理解读"></article>
+        </div>
+        <div class="node-dock" id="causal-dock"></div>
+      </div>
+
+      <div class="mastery-view mastery-quiz" id="mastery-quiz-view" hidden>
+        <div class="quiz-shell" id="quiz"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Unified Mobile Bottom Sheet / Tablet Side Sheet -->
+<dialog id="sheet-dialog" class="sheet-dialog" aria-labelledby="sheet-title">
+  <div class="sheet-frame" id="sheet-frame">
+    <div class="sheet-handle-zone" id="sheet-handle-zone" aria-hidden="true">
+      <span class="sheet-handle"></span>
+    </div>
+    <header class="sheet-head" id="sheet-head">
+      <div class="sheet-head-left" id="sheet-head-left">
+        <span class="sheet-overline" id="sheet-title"></span>
+      </div>
+      <button type="button" class="icon-close-btn" data-close-dialog aria-label="关闭面板">
+        <svg class="icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"></path></svg>
+      </button>
+    </header>
+    <div class="sheet-subbar" id="sheet-subbar" hidden></div>
+    <div class="sheet-body" id="sheet-body"></div>
+    <footer class="sheet-foot" id="sheet-foot"></footer>
+  </div>
+</dialog>
+
+<!-- Gate 12 Pre-checks Modal / Sheet -->
+<dialog id="gate-dialog" class="gate-dialog" aria-labelledby="gate-title">
+  <div class="sheet-frame gate-frame">
+    <div class="sheet-handle-zone only-mobile" aria-hidden="true">
+      <span class="sheet-handle"></span>
+    </div>
+    <header class="sheet-head gate-head">
+      <div class="gate-head-titles">
+        <h2 class="section-heading" id="gate-title">观舌前 12 项假象排除闸门</h2>
+        <p class="caption-note">勾选此刻符合你的情况，系统会实时提醒假象风险</p>
+      </div>
+      <button type="button" class="icon-close-btn" data-close-dialog aria-label="关闭闸门">
+        <svg class="icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"></path></svg>
+      </button>
+    </header>
+    <div class="sheet-body gate-body">
+      <div class="gate-grid" id="gate-grid"></div>
+    </div>
+    <footer class="sheet-foot gate-foot">
+      <button type="button" class="btn btn-ghost" id="gate-clear-btn">全部清除</button>
+      <span class="sheet-foot-count" id="gate-foot-count">已勾选 0 / 12</span>
+      <button type="button" class="btn btn-primary" id="gate-done-btn" data-close-dialog>完成</button>
+    </footer>
+  </div>
+</dialog>
+
+<!-- Wizard Full Trajectory Modal / Sheet -->
+<dialog id="rail-dialog" class="rail-dialog" aria-labelledby="rail-dialog-title">
+  <div class="sheet-frame rail-frame">
+    <div class="sheet-handle-zone only-mobile" aria-hidden="true">
+      <span class="sheet-handle"></span>
+    </div>
+    <header class="sheet-head">
+      <div class="gate-head-titles">
+        <h2 class="section-heading" id="rail-dialog-title">分路轨迹</h2>
+        <p class="caption-note">高亮为已选路径，浅色为未选分支；点任一已解锁节点或步骤即可回溯改选</p>
+      </div>
+      <button type="button" class="icon-close-btn" data-close-dialog aria-label="关闭分路轨迹">
+        <svg class="icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"></path></svg>
+      </button>
+    </header>
+    <div class="sheet-body rail-body">
+      <div class="rail" id="wizard-rail"></div>
+    </div>
+  </div>
+</dialog>
+
+<!-- Global Search Modal (Ctrl/Cmd + K) -->
+<dialog id="search-dialog" class="search-dialog" aria-label="全书搜索">
+  <div class="search-frame">
+    <div class="search-field">
+      <div class="search-input-box">
+        <svg class="icon search-field-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="5.5"></circle><path d="M13.2 13.2L17 17"></path></svg>
+        <input id="search-input" class="search-input" type="text" enterkeyhint="search" placeholder="搜索章节、体质、舌象、方法、药材" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="search-results" aria-autocomplete="list">
+        <button type="button" class="search-clear-btn" id="search-clear" aria-label="清空关键词" hidden>
+          <svg class="icon icon-xs" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 6l8 8M14 6l-8 8"></path></svg>
+        </button>
+      </div>
+      <button type="button" class="search-cancel-btn only-mobile" data-close-dialog>取消</button>
+      <button type="button" class="kbd-btn only-tablet-up" data-close-dialog aria-label="关闭搜索">Esc</button>
+    </div>
+    <div class="search-cats" id="search-cats" role="tablist" aria-label="搜索结果分类筛选" hidden></div>
+    <div class="search-results" id="search-results" role="listbox" aria-label="搜索结果"></div>
+    <p class="search-foot only-tablet-up">↑↓ 选择 · ↵ 打开 · Esc 关闭</p>
+  </div>
+</dialog>
+
+<!-- Unified Sign Detail Modal (SignDialog) -->
+<dialog id="sign-dialog" class="sign-dialog" aria-labelledby="sign-dialog-title">
+  <div class="sign-dialog-frame" id="sign-dialog-frame">
+    <div class="sign-dialog-top">
+      <button type="button" class="icon-close-btn" data-close-dialog aria-label="关闭舌象详情">
+        <svg class="icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"></path></svg>
+      </button>
+    </div>
+    <div class="sign-dialog-content" id="sign-dialog-content"></div>
+  </div>
+</dialog>
+
+<!-- Unified Figure Lightbox (FigureLightbox) -->
+<dialog id="lightbox-dialog" class="lightbox-dialog" aria-labelledby="lightbox-caption">
+  <div class="lightbox-frame">
+    <div class="lightbox-top">
+      <button type="button" class="icon-close-btn" data-close-dialog aria-label="关闭大图">
+        <svg class="icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"></path></svg>
+      </button>
+    </div>
+    <div class="lightbox-stage" id="lightbox-stage"></div>
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+    <footer class="lightbox-foot" id="lightbox-foot" hidden></footer>
+  </div>
+</dialog>
+
+<!-- Quiz Reset Confirmation Modal -->
+<dialog id="confirm-dialog" class="confirm-dialog" aria-labelledby="confirm-title">
+  <div class="confirm-frame">
+    <h2 class="confirm-title" id="confirm-title">重新闯关？</h2>
+    <p class="confirm-desc" id="confirm-desc"></p>
+    <div class="confirm-actions">
+      <button type="button" class="btn btn-ghost" data-close-dialog>取消</button>
+      <button type="button" class="btn btn-primary" id="confirm-ok-btn">重新闯关</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Singleton Inline Citation Popover -->
+<div id="cite-popover" class="cite-popover" popover="manual" role="group" aria-label="原书出处">
+  <span class="cite-popover-arrow" id="cite-popover-arrow" aria-hidden="true"></span>
+  <div id="cite-popover-mount"></div>
+</div>
+
+<script src="./data/kb_data.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
